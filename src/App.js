@@ -8,7 +8,8 @@ import ReusableAssetsTrackPage from './ReusableAssetsTrackPage';
 import AIAutomationTrackPage from './AIAutomationTrackPage';
 import SchedulePage from './SchedulePage';
 import MySubmissionsPage from './MySubmissionsPage';
-import Rulebook from './Rulebook'
+import RulebookPage from './RulebookPage';
+import ProfilePage from './ProfilePage';
 
 const App = () => {
   return (
@@ -22,7 +23,8 @@ const App = () => {
         <Route path="/tracks/ai-automation" element={<AIAutomationTrackPage />} />
         <Route path="/schedule" element={<SchedulePage />} />
         <Route path="/submissions" element={<MySubmissionsPage />} />
-        <Route path="/rulebook" element={<Rulebook />} />
+        <Route path="/rulebook" element={<RulebookPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Router>
   );

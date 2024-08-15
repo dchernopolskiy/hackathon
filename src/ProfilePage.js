@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { User, Mail, Briefcase, MapPin, GitHub, Twitter, Edit, ArrowLeft } from 'lucide-react';
+import { User, Mail, Briefcase, MapPin, Github, Twitter, Edit, ArrowLeft } from 'lucide-react';
 import LeftNavigationPane from './LeftNavigationPane';
 
 const ProfilePage = () => {
@@ -64,7 +64,7 @@ const ProfilePage = () => {
                     {user.location}
                   </div>
                   <div className="flex items-center mr-4 mb-2">
-                    <GitHub size={16} className="mr-2" />
+                    <Github size={16} className="mr-2" />
                     <a href={`https://github.com/${user.github}`} className="hover:text-purple-400 transition duration-300">
                       {user.github}
                     </a>

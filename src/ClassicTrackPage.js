@@ -3,6 +3,17 @@ import { Link } from 'react-router-dom';
 import { User, ThumbsUp } from 'lucide-react';
 import LeftNavigationPane from './LeftNavigationPane';
 
+const rickAstleyImages = [
+"https://i.imgur.com/TZoA7ht.png",
+"https://i.imgur.com/qj55xAl.jpeg",
+"https://i.imgur.com/9Aw4IoN.jpeg",
+"https://i.imgur.com/D9WVl4T.jpeg",
+"https://i.imgur.com/uZaP99v.jpeg",
+"https://i.imgur.com/YPmY4QY.jpeg",
+];
+
+const getRandomRickImage = () => rickAstleyImages[Math.floor(Math.random() * rickAstleyImages.length)];
+
 const HackEntry = ({ hack }) => {
   const [upvotes, setUpvotes] = useState(hack.upvotes);
 
@@ -42,8 +53,8 @@ const HackEntry = ({ hack }) => {
           className="mb-4"
         ></iframe>
         <div className="grid grid-cols-5 gap-2">
-          {hack.images.map((img, index) => (
-            <img key={index} src={img} alt={`Hack ${index + 1}`} className="w-full h-24 object-cover rounded" />
+          {[...Array(5)].map((_, index) => (
+            <img key={index} src={getRandomRickImage()} alt={`Hack ${index + 1}`} className="w-full h-24 object-cover rounded" />
           ))}
         </div>
       </div>

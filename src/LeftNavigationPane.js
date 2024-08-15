@@ -10,7 +10,7 @@ const LeftNavigation = ({ isTracksExpanded, setIsTracksExpanded }) => (
         <li><Link to="/" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">About</Link></li>
         <li><Link to="/rulebook" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">Submission Rules</Link></li>
         <li><Link to="/schedule" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">Schedule</Link></li>
-        <li><Link to="/resources" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">Resources</Link></li>
+        <li><Link to="https://luxproject.luxoft.com/confluence/display/AUENG/AE_AMS+Initiatives+-+Hackathon+US" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">Resources</Link></li> 
         <li>
           <button 
             className="flex items-center justify-between w-full py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300"

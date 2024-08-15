@@ -3,23 +3,35 @@ import { Link } from 'react-router-dom';
 import { User, Mail, Briefcase, MapPin, Github, Twitter, Edit, ArrowLeft } from 'lucide-react';
 import LeftNavigationPane from './LeftNavigationPane';
 
+
+const rickAstleyImages = [
+"https://i.imgur.com/TZoA7ht.png",
+"https://i.imgur.com/qj55xAl.jpeg",
+"https://i.imgur.com/9Aw4IoN.jpeg",
+"https://i.imgur.com/D9WVl4T.jpeg",
+"https://i.imgur.com/uZaP99v.jpeg",
+"https://i.imgur.com/YPmY4QY.jpeg",
+];
+
+const getRandomRickImage = () => rickAstleyImages[Math.floor(Math.random() * rickAstleyImages.length)];
+
 const ProfilePage = () => {
   const [isTracksExpanded, setIsTracksExpanded] = useState(false);
 
   // Mock user data
   const user = {
-    name: "John Doe",
-    title: "Senior Software Engineer",
-    email: "john.doe@example.com",
-    location: "New York, NY",
-    bio: "Passionate about creating innovative solutions and contributing to open-source projects. Always eager to learn new technologies and share knowledge with the community.",
-    github: "johndoe",
-    twitter: "johndoe_dev",
-    skills: ["JavaScript", "React", "Node.js", "Python", "GraphQL", "Docker"],
+    name: "Rick Astley",
+    title: "Professional Singer & Hackathon Enthusiast",
+    email: "rick.astley@example.com",
+    location: "Newton-le-Willows, England",
+    bio: "Never gonna give you up, never gonna let you down. Always passionate about creating innovative solutions and contributing to open-source projects. You know the rules, and so do I!",
+    github: "rickastley",
+    twitter: "rickastley",
+    skills: ["Singing", "Dancing", "JavaScript", "React", "Node.js", "Python", "GraphQL", "Docker"],
     achievements: [
-      "Winner of Hackathon 2023",
-      "Open Source Contributor of the Year 2022",
-      "5x Certified Cloud Architect"
+      "Winner of Hackathon 2023: 'Never Gonna Give You Up' Edition",
+      "Open Source Contributor of the Year 2022: RickRoll.js",
+      "5x Certified Cloud Architect (and 1980s Pop Icon)"
     ]
   };
 
@@ -40,7 +52,7 @@ const ProfilePage = () => {
           <div className="max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-xl overflow-hidden">
             <div className="md:flex">
               <div className="md:flex-shrink-0">
-                <img className="h-48 w-full object-cover md:w-48" src="/api/placeholder/150/150" alt="Profile" />
+                <img className="h-48 w-full object-cover md:w-48" src={getRandomRickImage()} alt="Rick Astley" />
               </div>
               <div className="p-8">
                 <div className="flex justify-between items-start">
@@ -67,12 +79,6 @@ const ProfilePage = () => {
                     <Github size={16} className="mr-2" />
                     <a href={`https://github.com/${user.github}`} className="hover:text-purple-400 transition duration-300">
                       {user.github}
-                    </a>
-                  </div>
-                  <div className="flex items-center mb-2">
-                    <Twitter size={16} className="mr-2" />
-                    <a href={`https://twitter.com/${user.twitter}`} className="hover:text-purple-400 transition duration-300">
-                      {user.twitter}
                     </a>
                   </div>
                 </div>

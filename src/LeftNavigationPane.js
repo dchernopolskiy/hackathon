@@ -7,7 +7,8 @@ const LeftNavigation = ({ isTracksExpanded, setIsTracksExpanded }) => (
     <div className="p-5">
       <h2 className="text-2xl font-bold mb-5 text-white">Hackathon 2024</h2>
       <ul className="space-y-2">
-        <li><Link to="/hackathon" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">Dashboard</Link></li>
+        <li><Link to="/" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">About</Link></li>
+        <li><Link to="/rulebook" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">Submission Rules</Link></li>
         <li><Link to="/schedule" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">Schedule</Link></li>
         <li><Link to="/resources" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">Resources</Link></li>
         <li>

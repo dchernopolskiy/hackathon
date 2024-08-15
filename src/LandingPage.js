@@ -23,10 +23,15 @@ const Hero = () => (
     <div className="container mx-auto text-center px-4">
       <h2 className="text-5xl font-bold mb-4">US Hackathon 2024</h2>
       <p className="text-xl mb-8 text-gray-400">Join us for 48 hours of innovation, collaboration, and coding!</p>
-      <Link to="/register" className="bg-purple-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-purple-700 transition duration-300 inline-flex items-center">
-        Register Now
-        <ChevronRight className="ml-2" size={20} />
-      </Link>
+      <div className="flex flex-col items-center space-y-4">
+        <Link to="/register" className="bg-purple-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-purple-700 transition duration-300 inline-flex items-center">
+          Register Now
+          <ChevronRight className="ml-2" size={20} />
+        </Link>
+        <Link to="/hackathon" className="text-purple-400 hover:text-purple-300 transition duration-300">
+          or Login
+        </Link>
+      </div>
     </div>
   </section>
 );
@@ -52,12 +57,12 @@ const Features = () => (
         <FeatureCard 
           icon={BarChart2}
           title="Network"
-          description="Connect with like-minded individuals, industry experts, and potential employers."
+          description="Connect with like-minded individuals and gain friends along the way!"
         />
         <FeatureCard 
           icon={Zap}
           title="Win Prizes"
-          description="Showcase your skills and win amazing prizes, including internships and job opportunities."
+          description="Showcase your skills and win prizes, including merch, conference tickets and more."
         />
       </div>
     </div>
@@ -152,10 +157,15 @@ const CallToAction = () => (
     <div className="container mx-auto text-center px-4">
       <h2 className="text-3xl font-bold mb-4">Ready to hack?</h2>
       <p className="text-xl mb-8">Join us for an unforgettable experience of innovation and collaboration.</p>
-      <Link to="/register" className="bg-white text-purple-600 px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition duration-300 inline-flex items-center">
-        Register Now
-        <ChevronRight className="ml-2" size={20} />
-      </Link>
+      <div className="flex flex-col items-center space-y-4">
+        <Link to="/register" className="bg-white text-purple-600 px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition duration-300 inline-flex items-center justify-center">
+          Register Now
+          <ChevronRight className="ml-2" size={20} />
+        </Link>
+        <Link to="/hackathon" className="text-white hover:text-gray-200 transition duration-300">
+          or Login
+        </Link>
+      </div>
     </div>
   </section>
 );
@@ -163,7 +173,7 @@ const CallToAction = () => (
 const Footer = () => (
   <footer className="bg-gray-900 text-white py-8">
     <div className="container mx-auto text-center px-4">
-      <p>&copy; 2024 Dan Chernopolskii.</p>
+      <p>&copy; 2024 Dan Chernopolskii</p>
     </div>
   </footer>
 );

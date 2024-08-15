@@ -109,8 +109,8 @@ const JudgeCard = ({ name, title, imageUrl }) => (
 const Judges = () => (
   <section className="py-16">
     <div className="container mx-auto">
-      <h2 className="text-3xl font-bold text-center mb-4">The Judges</h2>
-      <p className="text-center mb-12">While main winners will be determined by democratic voting, our Judges will make a "Judges pick" for each track!</p>
+      <h2 className="text-3xl font-bold text-center mb-4 text-white">The Judges</h2>
+      <p className="text-center mb-12 text-white">While main winners will be determined by democratic voting, our Judges will make a "Judges pick" for each track!</p>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
         <JudgeCard 
           name="Ana Amari"
@@ -163,7 +163,7 @@ const CallToAction = () => (
 const Footer = () => (
   <footer className="bg-gray-900 text-white py-8">
     <div className="container mx-auto text-center px-4">
-      <p>&copy; 2024 US Hackathon. All rights reserved.</p>
+      <p>&copy; 2024 Dan Chernopolskii.</p>
     </div>
   </footer>
 );

@@ -19,12 +19,12 @@ const LeftNavigation = ({ isTracksExpanded, setIsTracksExpanded }) => (
             Tracks
             {isTracksExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
           </button>
-          {isTracksExpanded && (
-            <ul className="pl-4 mt-2 space-y-2">
-              <li><Link to="/tracks/classic" className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300"><Code size={16} className="mr-2" /> Classic Track</Link></li>
-              <li><Link to="/tracks/reusable-assets" className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300"><BarChart2 size={16} className="mr-2" /> Reusable Assets</Link></li>
-              <li><Link to="/tracks/ai-automation" className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300"><Zap size={16} className="mr-2" /> AI & Automation Track</Link></li>
-            </ul>
+            {isTracksExpanded && (
+              <ul className="pl-4 mt-2 space-y-2">
+                <li><Link to="/tracks/classic" className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300"><Code size={16} className="mr-2" /> Classic Track</Link></li>
+                <li><Link to="/tracks/reusable-assets" className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300"><BarChart2 size={16} className="mr-2" /> Reusable Assets</Link></li>
+                <li><Link to="/tracks/ai-automation" className="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300"><Zap size={16} className="mr-2" /> AI & Automation Track</Link></li>
+              </ul>
           )}
         </li>
         <li><Link to="/submissions" className="block py-2 px-4 text-gray-300 hover:bg-gray-700 rounded transition duration-300">My Submissions</Link></li>

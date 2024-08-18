@@ -1,13 +1,13 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LandingPage from './LandingPage';
-import RegistrationPage from './RegistrationPage';
-import HackathonMainPage from './HackathonMainPage';
-import TrackPage from './TrackPage';
-import SchedulePage from './SchedulePage';
-import MySubmissionsPage from './MySubmissionsPage';
-import RulebookPage from './RulebookPage';
-import ProfilePage from './ProfilePage';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LandingPage from "./LandingPage";
+import RegistrationPage from "./RegistrationPage";
+import HackathonMainPage from "./HackathonMainPage";
+import TrackPage from "./TrackPage";
+import SchedulePage from "./SchedulePage";
+import MySubmissionsPage from "./MySubmissionsPage";
+import RulebookPage from "./RulebookPage";
+import ProfilePage from "./ProfilePage";
 
 const App = () => {
   return (

@@ -1,30 +1,30 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { Hack } = require('../../models');
+const { Hack } = require("../../models");
 
-router.get('/', async (req, res) => {
-  console.log('GET /api/hacks route hit');
-  console.log('Request headers:', JSON.stringify(req.headers, null, 2));
-  console.log('Query params:', req.query);
+router.get("/", async (req, res) => {
+  console.log("GET /api/hacks route hit");
+  console.log("Request headers:", JSON.stringify(req.headers, null, 2));
+  console.log("Query params:", req.query);
   try {
     const { track } = req.query;
     let query = {};
     if (track) {
       query.track = track;
     }
-    console.log('MongoDB query:', JSON.stringify(query, null, 2));
-    const hacks = await Hack.find(query).populate('collaborators');
+    console.log("MongoDB query:", JSON.stringify(query, null, 2));
+    const hacks = await Hack.find(query).populate("collaborators");
     console.log(`Found ${hacks.length} hacks`);
-    console.log('Sending response:', JSON.stringify(hacks, null, 2));
+    console.log("Sending response:", JSON.stringify(hacks, null, 2));
     res.json(hacks);
   } catch (error) {
-    console.error('Error in GET /api/hacks:', error);
+    console.error("Error in GET /api/hacks:", error);
     res.status(500).json({ message: error.message });
   }
 });
 
 // Create a new hack
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const hack = new Hack(req.body);
     await hack.save();
@@ -35,9 +35,9 @@ router.post('/', async (req, res) => {
 });
 
 // Get all hacks
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const hacks = await Hack.find().populate('track').populate('collaborators');
+    const hacks = await Hack.find().populate("track").populate("collaborators");
     res.json(hacks);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -45,11 +45,13 @@ router.get('/', async (req, res) => {
 });
 
 // Get a specific hack
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const hack = await Hack.findById(req.params.id).populate('track').populate('collaborators');
+    const hack = await Hack.findById(req.params.id)
+      .populate("track")
+      .populate("collaborators");
     if (hack == null) {
-      return res.status(404).json({ message: 'Hack not found' });
+      return res.status(404).json({ message: "Hack not found" });
     }
     res.json(hack);
   } catch (error) {
@@ -58,11 +60,13 @@ router.get('/:id', async (req, res) => {
 });
 
 // Update a hack
-router.patch('/:id', async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
-    const hack = await Hack.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const hack = await Hack.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (hack == null) {
-      return res.status(404).json({ message: 'Hack not found' });
+      return res.status(404).json({ message: "Hack not found" });
     }
     res.json(hack);
   } catch (error) {
@@ -71,33 +75,33 @@ router.patch('/:id', async (req, res) => {
 });
 
 // Delete a hack
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const hack = await Hack.findByIdAndDelete(req.params.id);
     if (hack == null) {
-      return res.status(404).json({ message: 'Hack not found' });
+      return res.status(404).json({ message: "Hack not found" });
     }
-    res.json({ message: 'Hack deleted' });
+    res.json({ message: "Hack deleted" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
 // Upvote a hack
-router.post('/:id/upvote', async (req, res) => {
+router.post("/:id/upvote", async (req, res) => {
   try {
     const hack = await Hack.findById(req.params.id);
     if (!hack) {
-      return res.status(404).json({ message: 'Hack not found' });
+      return res.status(404).json({ message: "Hack not found" });
     }
-    
+
     //insert check for upvotes ++ userIds
-    const userId = 'someUserId';
+    const userId = "someUserId";
     if (!hack.upvotes.includes(userId)) {
       hack.upvotes.push(userId);
       await hack.save();
     }
-    
+
     res.json({ upvotes: hack.upvotes.length });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -105,14 +109,14 @@ router.post('/:id/upvote', async (req, res) => {
 });
 
 // Get all hacks
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const { track } = req.query;
     let query = {};
     if (track) {
       query.track = track;
     }
-    const hacks = await Hack.find(query).populate('collaborators');
+    const hacks = await Hack.find(query).populate("collaborators");
     res.json(hacks);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -120,25 +124,25 @@ router.get('/', async (req, res) => {
 });
 
 //handle options requests thanks AI again
-router.options('/', (req, res) => {
+router.options("/", (req, res) => {
   res.status(204).end();
 });
 
-router.get('/', async (req, res) => {
-  console.log('GET /api/hacks route hit');
-  console.log('Query params:', req.query);
+router.get("/", async (req, res) => {
+  console.log("GET /api/hacks route hit");
+  console.log("Query params:", req.query);
   try {
     const { track } = req.query;
     let query = {};
     if (track) {
       query.track = track;
     }
-    console.log('MongoDB query:', query);
-    const hacks = await Hack.find(query).populate('collaborators');
+    console.log("MongoDB query:", query);
+    const hacks = await Hack.find(query).populate("collaborators");
     console.log(`Found ${hacks.length} hacks`);
     res.json(hacks);
   } catch (error) {
-    console.error('Error in GET /api/hacks:', error);
+    console.error("Error in GET /api/hacks:", error);
     res.status(500).json({ message: error.message });
   }
 });

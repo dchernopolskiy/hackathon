@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { User, Upload } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { User, Upload } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationPage = () => {
-  const [bio, setBio] = useState('');
+  const [bio, setBio] = useState("");
   const [photo, setPhoto] = useState(null);
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const RegistrationPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // send to backend
-    navigate('/hackathon');
+    navigate("/hackathon");
   };
 
   return (
@@ -37,7 +37,11 @@ const RegistrationPage = () => {
             <div className="flex justify-center">
               <div className="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden relative">
                 {photo ? (
-                  <img src={photo} alt="Profile" className="w-full h-full object-cover" />
+                  <img
+                    src={photo}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
                 ) : (
                   <User size={48} className="text-gray-400" />
                 )}
@@ -53,7 +57,10 @@ const RegistrationPage = () => {
               </div>
             </div>
             <div>
-              <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="firstName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 First Name
               </label>
               <input
@@ -64,10 +71,15 @@ const RegistrationPage = () => {
                 disabled
                 className="mt-1 block w-full bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-700"
               />
-              <p className="mt-1 text-xs text-gray-500">(automatically filled from login)</p>
+              <p className="mt-1 text-xs text-gray-500">
+                (automatically filled from login)
+              </p>
             </div>
             <div>
-              <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="lastName"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Last Name
               </label>
               <input
@@ -78,11 +90,16 @@ const RegistrationPage = () => {
                 disabled
                 className="mt-1 block w-full bg-gray-100 border border-gray-300 rounded-md shadow-sm py-2 px-3 text-gray-700"
               />
-              <p className="mt-1 text-xs text-gray-500">(automatically filled from login)</p>
+              <p className="mt-1 text-xs text-gray-500">
+                (automatically filled from login)
+              </p>
             </div>
             {/* Bio section */}
             <div>
-              <label htmlFor="bio" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="bio"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Bio
               </label>
               <textarea
@@ -95,7 +112,9 @@ const RegistrationPage = () => {
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm"
                 placeholder="Tell us a bit about yourself..."
               />
-              <p className="mt-1 text-xs text-gray-500">{bio.length}/150 characters</p>
+              <p className="mt-1 text-xs text-gray-500">
+                {bio.length}/150 characters
+              </p>
             </div>
             <div>
               <button

@@ -1,9 +1,9 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { User } = require('../../models');
+const { User } = require("../../models");
 
 // Create a new user
-router.post('/', async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const user = new User(req.body);
     await user.save();
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
 });
 
 // Get all users
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -24,11 +24,11 @@ router.get('/', async (req, res) => {
 });
 
 // Get a specific user
-router.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (user == null) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
     res.json(user);
   } catch (error) {
@@ -37,11 +37,13 @@ router.get('/:id', async (req, res) => {
 });
 
 // Update a user
-router.patch('/:id', async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     if (user == null) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
     res.json(user);
   } catch (error) {
@@ -50,13 +52,13 @@ router.patch('/:id', async (req, res) => {
 });
 
 // Delete a user
-router.delete('/:id', async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
     if (user == null) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
-    res.json({ message: 'User deleted' });
+    res.json({ message: "User deleted" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

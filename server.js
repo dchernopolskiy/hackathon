@@ -17,7 +17,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   }),
-);
+);  
 
 // Logging middleware
 app.use((req, res, next) => {

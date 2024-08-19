@@ -130,16 +130,10 @@ router.options("/", (req, res) => {
 
 router.get("/", async (req, res) => {
   console.log("GET /api/hacks route hit");
-  console.log("Query params:", req.query);
   try {
     const { track } = req.query;
-    let query = {};
-    if (track) {
-      query.track = track;
-    }
-    console.log("MongoDB query:", query);
+    let query = track ? { track } : {};
     const hacks = await Hack.find(query).populate("collaborators");
-    console.log(`Found ${hacks.length} hacks`);
     res.json(hacks);
   } catch (error) {
     console.error("Error in GET /api/hacks:", error);

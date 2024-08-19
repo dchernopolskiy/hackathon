@@ -3,20 +3,24 @@ const router = express.Router();
 const { Hack } = require("../../models");
 
 router.get("/", async (req, res) => {
-  console.log("GET /api/hacks route hit");
-  console.log("Request headers:", JSON.stringify(req.headers, null, 2));
-  console.log("Query params:", req.query);
   try {
-    const { track } = req.query;
-    let query = {};
-    if (track) {
-      query.track = track;
-    }
-    console.log("MongoDB query:", JSON.stringify(query, null, 2));
-    const hacks = await Hack.find(query).populate("collaborators");
-    console.log(`Found ${hacks.length} hacks`);
-    console.log("Sending response:", JSON.stringify(hacks, null, 2));
-    res.json(hacks);
+    const { track, page = 1, limit = 20 } = req.query;
+    const query = track ? { track } : {};
+    
+    const hacks = await Hack.find(query)
+      .populate("collaborators", "username email") // Only select necessary fields
+      .limit(Number(limit))
+      .skip((Number(page) - 1) * Number(limit))
+      .lean() // Use lean for better performance
+      .exec();
+
+    const count = await Hack.countDocuments(query);
+
+    res.json({
+      hacks,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page
+    });
   } catch (error) {
     console.error("Error in GET /api/hacks:", error);
     res.status(500).json({ message: error.message });

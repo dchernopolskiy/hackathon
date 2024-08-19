@@ -23,6 +23,11 @@ router.get("/", async (req, res) => {
   }
 });
 
+//Handle options requests thanks AI again
+router.options("/", (req, res) => {
+  res.status(204).end();
+});
+
 // Create a new hack
 router.post("/", async (req, res) => {
   try {
@@ -123,23 +128,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-//handle options requests thanks AI again
-router.options("/", (req, res) => {
-  res.status(204).end();
-});
-
-router.get("/", async (req, res) => {
-  console.log("GET /api/hacks route hit");
-  try {
-    const { track } = req.query;
-    let query = track ? { track } : {};
-    const hacks = await Hack.find(query).populate("collaborators");
-    res.json(hacks);
-  } catch (error) {
-    console.error("Error in GET /api/hacks:", error);
-    res.status(500).json({ message: error.message });
-  }
-});
 
 module.exports = router;
 

@@ -6,8 +6,8 @@ const routes = require("./routes");
 const app = express();
 
 // Increase header size limit
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // CORS configuration
 app.use(
@@ -18,6 +18,9 @@ app.use(
     credentials: true,
   })
 );
+
+// Pre-flight request handling
+app.options('*', cors());
 
 // Logging middleware
 app.use((req, res, next) => {
@@ -32,9 +35,7 @@ app.use("/api", routes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error("Error:", err);
-  res
-    .status(500)
-    .json({ message: "Internal Server Error", error: err.message });
+  res.status(500).json({ message: "Internal Server Error", error: err.message });
 });
 
 const PORT = process.env.PORT || 3001;

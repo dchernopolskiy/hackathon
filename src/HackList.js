@@ -74,7 +74,7 @@ const HackList = ({ trackId }) => {
     const fetchHacks = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`/api/hacks${trackId ? `?track=${trackId}` : ""}`);
+        const response = await axios.get(`https://hackathon-9xbt.onrender.com/api/hacks${trackId ? `?track=${trackId}` : ""}`);
         setHacks(response.data);
         setError(null);
       } catch (err) {
@@ -86,7 +86,7 @@ const HackList = ({ trackId }) => {
     };
 
     fetchHacks();
-  }, [trackId]);
+  }, [trackId]);  
 
   if (loading) {
     return <div className="text-white">Loading...</div>;

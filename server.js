@@ -5,14 +5,10 @@ const routes = require("./routes");
 
 const app = express();
 
-// Increase header size limit
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
-
 // CORS configuration
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "https://backendprep--luxofthack.netlify.app",
+    origin: "https://backendprep--luxofthack.netlify.app",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,

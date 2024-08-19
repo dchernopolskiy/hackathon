@@ -74,28 +74,12 @@ const HackList = ({ trackId }) => {
     const fetchHacks = async () => {
       setLoading(true);
       try {
-        console.log(`HackList: Fetching hacks for track ${trackId}`);
-        const url = `http://localhost:3001/api/hacks${trackId ? `?track=${trackId}` : ""}`;
-        console.log("Fetching URL:", url);
-
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-          },
-        });
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        console.log("HackList: Response received", data);
-        setHacks(data);
+        const response = await axios.get(`/api/hacks${trackId ? `?track=${trackId}` : ""}`);
+        setHacks(response.data);
         setError(null);
       } catch (err) {
-        console.error("HackList: Error fetching hacks", err);
-        setError(err.message || "An error occurred while fetching hacks");
+        console.error("Error fetching hacks:", err);
+        setError("An error occurred while fetching hacks");
       } finally {
         setLoading(false);
       }

@@ -5,6 +5,13 @@ const routes = require("./routes");
 
 const app = express();
 
+const memoryMonitor = new MemoryMonitor({
+  interval: 30000, // Check every 30 seconds
+  warningThreshold: 0.7,
+  criticalThreshold: 0.9
+});
+memoryMonitor.start();
+
 // CORS configuration
 app.use(
   cors({
@@ -48,5 +55,18 @@ const startServer = async () => {
     process.exit(1);
   }
 };
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+  memoryMonitor.logMemoryInfo(process.memoryUsage());
+  // Perform a graceful shutdown
+  process.exit(1);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  memoryMonitor.logMemoryInfo(process.memoryUsage());
+});
+
 
 startServer();

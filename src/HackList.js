@@ -74,13 +74,13 @@ const HackList = ({ trackId }) => {
     const fetchHacks = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`https://hackathon-9xbt.onrender.com/api/hacks${trackId ? `?track=${trackId}` : ""}`);
+        const response = await axios.get(`https://hackathon-1-6kpk.onrender.com/hacks${trackId ? `?track=${trackId}` : ""}`);
         setHacks(response.data);
         setError(null);
       } catch (err) {
         console.error("Error fetching hacks:", err);
         setError("An error occurred while fetching hacks");
-      } finally {
+      } finally { 
         setLoading(false);
       }
     };

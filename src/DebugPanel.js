@@ -6,7 +6,7 @@ const DebugPanel = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const API_URL = 'https://hackathon-9xbt.onrender.com/api/hacks';
+  const API_URL = 'https://hackathon-1-6kpk.onrender.com/hacks';
 
   const performCorsChecks = async () => {
     setLoading(true);

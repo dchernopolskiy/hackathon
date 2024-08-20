@@ -70,7 +70,7 @@ const HackList = ({ trackId }) => {
       setLoading(true);
       try {
         console.log(`HackList: Fetching hacks for track ${trackId}`);
-        const url = `http://localhost:3000/api/hacks${trackId ? `?track=${trackId}` : ''}`;
+        const url = `http://localhost:3001/api/hacks${trackId ? `?track=${trackId}` : ''}`;
         console.log('Fetching URL:', url);
 
         const response = await fetch(url, {

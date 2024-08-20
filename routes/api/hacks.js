@@ -3,7 +3,7 @@ const router = express.Router();
 const { Hack } = require("../../models");
 
 const NodeCache = require("node-cache");
-const cache = new NodeCache({ stdTTL: 300, checkperiod: 320 });
+const cache = new NodeCache({ stdTTL: 100, checkperiod: 120, maxKeys: 1000 });
 
 router.get("/", async (req, res) => {
   const { track, page = 1, limit = 20 } = req.query;

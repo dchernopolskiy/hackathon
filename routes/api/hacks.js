@@ -2,25 +2,36 @@ const express = require("express");
 const router = express.Router();
 const { Hack } = require("../../models");
 
+const NodeCache = require("node-cache");
+const cache = new NodeCache({ stdTTL: 300, checkperiod: 320 });
+
 router.get("/", async (req, res) => {
+  const { track, page = 1, limit = 20 } = req.query;
+  const cacheKey = `hacks_${track || 'all'}_${page}_${limit}`;
+
   try {
-    const { track, page = 1, limit = 20 } = req.query;
+    const cachedData = cache.get(cacheKey);
+    if (cachedData) {
+      return res.json(cachedData);
+    }
+
     const query = track ? { track } : {};
-    
     const hacks = await Hack.find(query)
-      .populate("collaborators", "username email") // Only select necessary fields
+      .populate("collaborators", "username email")
       .limit(Number(limit))
       .skip((Number(page) - 1) * Number(limit))
-      .lean() // Use lean for better performance
+      .lean()
       .exec();
 
     const count = await Hack.countDocuments(query);
-
-    res.json({
+    const result = {
       hacks,
       totalPages: Math.ceil(count / limit),
       currentPage: page
-    });
+    };
+
+    cache.set(cacheKey, result);
+    res.json(result);
   } catch (error) {
     console.error("Error in GET /api/hacks:", error);
     res.status(500).json({ message: error.message });
@@ -132,7 +143,32 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/debug", async (req, res) => {
+  try {
+    const hacksCount = await Hack.countDocuments();
+    const debugInfo = {
+      nodeVersion: process.version,
+      platform: process.platform,
+      arch: process.arch,
+      hostname: os.hostname(),
+      cpus: os.cpus().length,
+      totalMemory: os.totalmem(),
+      freeMemory: os.freemem(),
+      uptime: process.uptime(),
+      env: {
+        NODE_ENV: process.env.NODE_ENV,
+        MONGODB_URI: process.env.MONGODB_URI ? 'Set' : 'Not set',
+      },
+      headers: req.headers,
+      hacksCount: hacksCount,
+      databaseConnection: mongoose.connection.readyState === 1 ? 'Connected' : 'Disconnected',
+    };
 
-module.exports = router;
+    res.json(debugInfo);
+  } catch (error) {
+    console.error("Error in GET /api/hacks/debug:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
 
 module.exports = router;

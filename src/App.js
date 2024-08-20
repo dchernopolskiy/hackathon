@@ -8,6 +8,7 @@ import SchedulePage from "./SchedulePage";
 import MySubmissionsPage from "./MySubmissionsPage";
 import RulebookPage from "./RulebookPage";
 import ProfilePage from "./ProfilePage";
+import DebugPanel from "./DebugPanel";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/rulebook" element={<RulebookPage />} />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>
+      <DebugPanel />
     </Router>
   );
 };

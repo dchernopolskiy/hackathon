@@ -39,7 +39,10 @@ const PORT = process.env.PORT || 3001;
 const startServer = async () => {
   try {
     await connectDB();
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      startMemoryProfiling(300000); // Start profiling every 5 minutes
+    });
   } catch (error) {
     console.error("Failed to start server:", error.message);
     process.exit(1);

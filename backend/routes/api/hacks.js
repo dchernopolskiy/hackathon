@@ -45,14 +45,25 @@ router.post('/', upload.array('images[]', 5), async (req, res) => {
       error: error.message,
       stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
+  }
 });
 
 // Get all hacks
 router.get('/', async (req, res) => {
+  console.log('GET /api/hacks route hit');
+  console.log('Query params:', req.query);
   try {
-    const hacks = await Hack.find().populate('track').populate('collaborators');
+    const { track } = req.query;
+    let query = {};
+    if (track) {
+      query.track = track;
+    }
+    console.log('MongoDB query:', query);
+    const hacks = await Hack.find(query).populate('collaborators');
+    console.log(`Found ${hacks.length} hacks`);
     res.json(hacks);
   } catch (error) {
+    console.error('Error in GET /api/hacks:', error);
     res.status(500).json({ message: error.message });
   }
 });
@@ -117,45 +128,9 @@ router.post('/:id/upvote', async (req, res) => {
   }
 });
 
-// Get all hacks
-router.get('/', async (req, res) => {
-  try {
-    const { track } = req.query;
-    let query = {};
-    if (track) {
-      query.track = track;
-    }
-    const hacks = await Hack.find(query).populate('collaborators');
-    res.json(hacks);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
 //handle options requests thanks AI again
 router.options('/', (req, res) => {
   res.status(204).end();
 });
-
-router.get('/', async (req, res) => {
-  console.log('GET /api/hacks route hit');
-  console.log('Query params:', req.query);
-  try {
-    const { track } = req.query;
-    let query = {};
-    if (track) {
-      query.track = track;
-    }
-    console.log('MongoDB query:', query);
-    const hacks = await Hack.find(query).populate('collaborators');
-    console.log(`Found ${hacks.length} hacks`);
-    res.json(hacks);
-  } catch (error) {
-    console.error('Error in GET /api/hacks:', error);
-    res.status(500).json({ message: error.message });
-  }
-});
-
-module.exports = router;
 
 module.exports = router;

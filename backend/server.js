@@ -9,6 +9,8 @@ const app = express();
 require('./memoryManagement');
 
 // CORS configuration
+app.options('*', cors()); 
+
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",

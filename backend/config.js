@@ -5,9 +5,9 @@ module.exports = {
   //   uri: process.env.MONGODB_URI || 'mongodburi',
   // },
   server: {
-    port: process.env.PORT || 3001,
+    port: process.env.PORT || 5000,
   },
   frontend: {
-    url: process.env.FRONTEND_URL || 'http://localhost:3000',
+    url: process.env.FRONTEND_URL || 'https://luxhack.netlify.app',
   },
 };

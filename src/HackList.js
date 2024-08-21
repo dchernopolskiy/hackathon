@@ -64,13 +64,14 @@ const HackList = ({ trackId }) => {
   const [hacks, setHacks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const fetchHacks = async () => {
       setLoading(true);
       try {
         console.log(`HackList: Fetching hacks for track ${trackId}`);
-        const url = `/api/hacks${trackId ? `?track=${trackId}` : ''}`;
+        const url = `${BACKEND_URL}/api/hacks${trackId ? `?track=${trackId}` : ''}`;
         console.log('Fetching URL:', url);
 
         const response = await fetch(url, {

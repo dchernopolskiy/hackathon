@@ -1,37 +1,50 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
 const { Hack } = require('../../models');
 
-router.get('/', async (req, res) => {
-  console.log('GET /api/hacks route hit');
-  console.log('Request headers:', JSON.stringify(req.headers, null, 2));
-  console.log('Query params:', req.query);
-  try {
-    const { track } = req.query;
-    let query = {};
-    if (track) {
-      query.track = track;
-    }
-    console.log('MongoDB query:', JSON.stringify(query, null, 2));
-    const hacks = await Hack.find(query).populate('collaborators');
-    console.log(`Found ${hacks.length} hacks`);
-    console.log('Sending response:', JSON.stringify(hacks, null, 2));
-    res.json(hacks);
-  } catch (error) {
-    console.error('Error in GET /api/hacks:', error);
-    res.status(500).json({ message: error.message });
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/') // Make sure this directory exists
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) // Appending extension
   }
 });
 
+const upload = multer({ storage: storage });
+
 // Create a new hack
-router.post('/', async (req, res) => {
+router.post('/', upload.array('images[]', 5), async (req, res) => {
   try {
-    const hack = new Hack(req.body);
-    await hack.save();
-    res.status(201).json(hack);
+    console.log('Received hack submission:', req.body);
+    console.log('Uploaded files:', req.files);
+
+    const { title, description, videoUrl, track } = req.body;
+    const images = req.files ? req.files.map(file => file.path) : [];
+
+    const hack = new Hack({
+      title,
+      description,
+      videoUrl,
+      images,
+      track,
+      // Add collaborators based on the logged-in user
+      // collaborators: [req.user._id], // !!Implement auth!!
+    });
+
+    const savedHack = await hack.save();
+    console.log('Hack saved successfully:', savedHack);
+    res.status(201).json(savedHack);
   } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+    console.error('Error submitting hack:', error);
+    res.status(500).json({ 
+      message: 'Failed to submit hack', 
+      error: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
 });
 
 // Get all hacks

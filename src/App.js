@@ -8,6 +8,8 @@ import SchedulePage from './SchedulePage';
 import MySubmissionsPage from './MySubmissionsPage';
 import RulebookPage from './RulebookPage';
 import ProfilePage from './ProfilePage';
+import HackSubmissionPage from './HackSubmissionPage';
+
 
 const App = () => {
   return (
@@ -21,6 +23,7 @@ const App = () => {
         <Route path="/submissions" element={<MySubmissionsPage />} />
         <Route path="/rulebook" element={<RulebookPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/submit-hack" element={<HackSubmissionPage />} />
       </Routes>
     </Router>
   );

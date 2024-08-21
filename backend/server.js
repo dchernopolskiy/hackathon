@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./db');
 const routes = require('./routes');
+const config = require('./config');
 
 const app = express();
 
@@ -33,7 +34,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Internal Server Error', error: err.message });
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = config.server.port || 5000;
 
 const startServer = async () => {
   try {

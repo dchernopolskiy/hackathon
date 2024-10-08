@@ -3,31 +3,22 @@ const cors = require('cors');
 const connectDB = require('./db');
 const routes = require('./routes');
 const config = require('./config');
+const passport = require('passport');
+const session = require('express-session');
 
 const app = express();
 
 require('./memoryManagement');
 
 // CORS configuration
-app.options('*', cors()); 
+app.use(cors({ origin: config.frontend.url, credentials: true }));
 
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "*"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  res.setHeader("Access-Control-Allow-Private-Network", true);
-  //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
-  res.setHeader("Access-Control-Max-Age", 7200);
+// Session configuration
+app.use(session(config.session));
+
+// Passport initialization
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Logging middleware
 app.use((req, res, next) => {
@@ -45,7 +36,7 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Internal Server Error', error: err.message });
 });
 
-const PORT = config.server.port || 5000;
+const PORT = config.server.port;
 
 const startServer = async () => {
   try {

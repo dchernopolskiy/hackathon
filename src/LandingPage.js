@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Code, BarChart2, Zap, ChevronRight } from 'lucide-react';
+import MicrosoftLoginButton from './components/MicrosoftLogin';
 
 const Header = () => (
   <header className="bg-gray-900 text-white py-4">
@@ -24,13 +25,7 @@ const Hero = () => (
       <h2 className="text-5xl font-bold mb-4">US Hackathon 2024</h2>
       <p className="text-xl mb-8 text-gray-400">Join us for 48 hours of innovation, collaboration, and coding!</p>
       <div className="flex flex-col items-center space-y-4">
-        <Link to="/register" className="bg-purple-600 text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-purple-700 transition duration-300 inline-flex items-center">
-          Register Now
-          <ChevronRight className="ml-2" size={20} />
-        </Link>
-        <Link to="/hackathon" className="text-purple-400 hover:text-purple-300 transition duration-300">
-          or Login
-        </Link>
+        <MicrosoftLoginButton />
       </div>
     </div>
   </section>
@@ -161,9 +156,6 @@ const CallToAction = () => (
         <Link to="/register" className="bg-white text-purple-600 px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition duration-300 inline-flex items-center justify-center">
           Register Now
           <ChevronRight className="ml-2" size={20} />
-        </Link>
-        <Link to="/hackathon" className="text-white hover:text-gray-200 transition duration-300">
-          or Login
         </Link>
       </div>
     </div>

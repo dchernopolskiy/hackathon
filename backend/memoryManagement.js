@@ -1,7 +1,7 @@
 const v8 = require('v8');
 const fs = require('fs');
 
-const MAX_HEAP_SIZE = 400 * 1024 * 1024; // 400 MB in bytes
+const MAX_HEAP_SIZE = 1000 * 1024 * 1024; // 400 MB in bytes
 const CHECK_INTERVAL = 60000; // Check every minute
 
 function checkMemoryUsage() {
